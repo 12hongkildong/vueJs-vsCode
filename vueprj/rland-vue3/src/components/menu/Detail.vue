@@ -1,4 +1,4 @@
 <template>
-    <h1>리스트</h1>
+    <h1>디테일</h1>
 
 </template>
