@@ -1,6 +1,6 @@
 <script>
-    import Header from './header.vue';
-    import Footer from './footer.vue';
+    import Header from './Header.vue';
+    import Footer from './Footer.vue';
 
     export default {
         components:{
