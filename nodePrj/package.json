@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "newlec-hello": "^0.0.2"
-  },
-  "scripts" :{
-    "dev": "node hello"
-  }
-}
