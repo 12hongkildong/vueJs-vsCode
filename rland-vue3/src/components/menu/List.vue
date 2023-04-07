@@ -1,18 +1,31 @@
 <script>
-// const def = 
-export default {
-  data() {
-    return {
-      list: [{}, {}, {}, {},]
-    }
-  },
-  mounted() {
-    fetch("http://localhost:8080/menus")
-      .then(response => response.json())
-      .then(list => this.list = list);
+  import NewMenuList from './newMenuList.vue';
+
+  // const def = 
+  export default {
+      data() {
+          return {
+              list: [{}, {}, {}, {},],
+              newList:[]
+          };
+      },
+      mounted() {
+          fetch("http://localhost:8080/menus")
+              .then(response => response.json())
+              //.then(list => this.list = list);
+              .then(data => {
+                this.list = data.list;
+                this.newList = data.newList;
+              });
+          //.then(function(list/*이름*/){
+          // this.list=list;/*list: [{}, {}, {}, {},] 이게 대체된다.*/
+          //this.list.push(list[0]);
+          //})
+      },
+      components: { NewMenuList }
   }
-}
 </script>
+
 <style>
 @import url(/css/component/search-header.css);
 @import url(/css/component/menu-section.css);
@@ -76,11 +89,14 @@ export default {
         <div class="menu-list">
           <section class="menu" v-for="m in list">
             <form class="">
-              <h1>알랜드 커피</h1>
+              <h1>{{m.name}}</h1>
+              <span v-text="m.name"></span>
               <div class="menu-img-box">
-                <a href="detail.html"><img class="menu-img" src="/image/product/12.png"></a>
+                <!-- <this class="1router query"></this> -->
+                <!-- <router-link :to="'detail?id='+m.id" ><img class="menu-img" :src="'/image/product/'+m.img"></router-link> -->
+                <router-link :to="'./'+m.id" ><img class="menu-img" :src="'/image/product/'+m.img"></router-link>
               </div>
-              <div class="menu-price">4500 원</div>
+              <div class="menu-price">{{m.price}} 원</div>
               <div class="menu-option-list">
                 <span class="menu-option">
                   <input class="menu-option-input" type="checkbox">
@@ -105,16 +121,7 @@ export default {
         <a href="" class="btn btn-round w-100 w-50-md py-2">더보기(13+)</a>
       </div>
 
-      <section class="new-menu menu-section-p">
-        <h1 class="d-none">신메뉴 목록</h1>
-        <!-- <ul>
-                                                    <li>
-                                                      </li>
-                                                    </ul>  -->
-        <div class="list">
-          <span>신규로 출시된 메뉴가 없습니다.</span>
-        </div>
-      </section>
+      <NewMenuList></NewMenuList>
 
     </section>
   </main>

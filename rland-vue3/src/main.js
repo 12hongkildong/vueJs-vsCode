@@ -25,8 +25,11 @@ import MenuDetail from './components/menu/Detail.vue';
 const routes = [
   {path:'/index', component: Index},
   { path: '/', component: Layout, children:[
-      {path:'menu/list', component: MenuList},
-      {path:'menu/detail', component: MenuDetail},
+    {path:'menu', children:[
+      {path:'list', component: MenuList},
+      {path:'detail', component: MenuDetail},
+      {path:':id', component: MenuDetail},
+    ]},
       {path:'about', component: About},
   ]},
   { path: '/admin', component: AdminLayout, children:[
